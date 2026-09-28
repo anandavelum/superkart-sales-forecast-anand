@@ -82,6 +82,10 @@ def predict_sales_batch():
         # Read the CSV file into a Pandas DataFrame
         input_data = pd.read_csv(file)
 
+        input_data['Product_Allocated_Area_Log'] = np.log1p(input_data['Product_Allocated_Area'])
+
+        input_data.drop(columns=['Product_Allocated_Area'], inplace=True)
+
         # Make prediction
         predicted_sales = model.predict(input_data).tolist()
 
